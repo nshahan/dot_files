@@ -1,0 +1,11 @@
+# Bazel generated files
+# ######################
+bazel*
+
+# OS generated files #
+# ######################
+.DS_Store
+
+# Intellij generated files #
+# ######################
+.idea
