@@ -2,15 +2,31 @@ set nocompatible
 filetype off
 filetype plugin indent off
 
-
 set encoding=utf-8
 
-filetype plugin indent on    " required
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'natebosch/vim-lsc'
+
+" Initialize plugin system
+call plug#end()
+
+" Dart language server
+let g:lsc_server_commands = {
+    \ 'dart': 'dart_language_server',
+    \ 'html': 'dart_language_server',
+    \}
+let g:lsc_auto_map = v:true
+let g:lsc_enable_apply_edit = v:true
+
+filetype plugin indent on
 
 " Misc editor features
 set autoindent
 set ruler
-set relativenumber
+set number
 set noshowmode
 set showmatch
 set ignorecase
@@ -22,6 +38,7 @@ set shiftwidth=2
 set smartindent
 set hlsearch
 set cursorline
+set backspace=indent,eol,start
 
 " Misc prefrences
 syntax on
@@ -46,3 +63,4 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 filetype plugin on
 autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
+
