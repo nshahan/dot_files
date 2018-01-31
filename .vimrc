@@ -7,6 +7,7 @@ set nocompatible                " No compatibility with legacy vi
 set encoding=utf-8              " UTF8 encoding
 set hidden                      " Allow buffer switching without saving
 set clipboard=unnamed           " Map default copy/paste to * (clipboard)
+set nobackup                    " Don't save backup versions of files
 
 "
 " Editor view
