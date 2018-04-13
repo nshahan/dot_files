@@ -57,6 +57,7 @@ set tabstop=2                   " Indentation of two spaces
 set expandtab                   " Use spaces, not tabs
 set backspace=indent,eol,start  " Backspace through everything in insert mode
 
+
 " Plugins via vim-plug
 " github.com/junegunn/vim-plug
 
@@ -90,6 +91,12 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" Run dartfmt on save.
+let dart_format_on_save = 1
+
+" Close preview window after autocomplete.
+autocmd CompleteDone * silent! pclose
 
 " Remove trailing white space on save
 function! <SID>StripTrailingWhitespaces()
