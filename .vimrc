@@ -3,22 +3,29 @@ filetype off
 "
 " General Settings
 "
+set ttyfast
+set lazyredraw
 set nocompatible                " No compatibility with legacy vi
 set encoding=utf-8              " UTF8 encoding
 set hidden                      " Allow buffer switching without saving
 set clipboard=unnamed           " Map default copy/paste to * (clipboard)
 set nobackup                    " Don't save backup versions of files
 
+" Cursor shapes
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+
 "
 " Editor view
 "
 syntax on                       " Syntax highlighting
 set number                      " Line numbers
-hi LineNr ctermfg=grey
+"hi LineNr ctermfg=grey
 set showmatch                   " Show matching brackets/parenthesis
 set scrolloff=5                 " Minimum lines to keep above/below cursor
 set colorcolumn=81              " Show 80 col marker
-hi ColorColumn ctermbg=darkgrey
+"hi ColorColumn ctermbg=darkgrey
 set showmatch                   " Show matching braces
 
 "
@@ -33,6 +40,8 @@ set cursorline                  " Highlight the current line
 set ruler                       " Show col/row numbers in status bar
 set spell                       " Spellcheck on
 set spelllang=en                " Spellcheck language
+set splitbelow                  " Open new horizontal splits below
+set splitright                  " Open new vertical splits to the right
 hi clear SpellBad
 hi SpellBad cterm=underline
 hi SpellBad ctermfg=darkred
@@ -57,6 +66,16 @@ set tabstop=2                   " Indentation of two spaces
 set expandtab                   " Use spaces, not tabs
 set backspace=indent,eol,start  " Backspace through everything in insert mode
 
+"
+" Key Mappings
+"
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" j then k --> <esc>
+inoremap jk <esc>
 
 " Plugins via vim-plug
 " github.com/junegunn/vim-plug
@@ -69,9 +88,18 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'natebosch/vim-lsc'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'chriskempson/base16-vim'
 
 " Initialize plugin system
 call plug#end()
+
+" Color scheme setup
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
+
+colorscheme base16-eighties
 
 " Dart language server
 let g:lsc_server_commands = {
@@ -80,14 +108,6 @@ let g:lsc_server_commands = {
     \}
 let g:lsc_auto_map = v:true
 let g:lsc_enable_apply_edit = v:true
-
-
-" Map j then k to <esc>
-inoremap jk <esc>
-
-" Cursor shapes
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -111,6 +131,7 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
+
 "
 "NERDTree config
 "
