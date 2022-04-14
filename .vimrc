@@ -1,31 +1,57 @@
 filetype off
+"
+" Plugins via vim-plug -- github.com/junegunn/vim-plug
+"
+filetype plugin indent off
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+
+" Initialize plugin system
+call plug#end()
+
+" Color scheme setup
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+colorscheme base16-eighties
 
 "
-" General Settings
+" General settings
 "
 set ttyfast
 set lazyredraw
 set nocompatible                " No compatibility with legacy vi
 set encoding=utf-8              " UTF8 encoding
 set hidden                      " Allow buffer switching without saving
-set clipboard=unnamed           " Map default copy/paste to * (clipboard)
+set clipboard=unnamedplus       " Map default copy/paste to * (clipboard)
 set nobackup                    " Don't save backup versions of files
 
+"
 " Cursor shapes
+"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
 
 "
 " Editor view
 "
 syntax on                       " Syntax highlighting
 set number                      " Line numbers
-"hi LineNr ctermfg=grey
 set showmatch                   " Show matching brackets/parenthesis
 set scrolloff=5                 " Minimum lines to keep above/below cursor
 set colorcolumn=81              " Show 80 col marker
-"hi ColorColumn ctermbg=darkgrey
 set showmatch                   " Show matching braces
 
 "
@@ -40,10 +66,11 @@ set cursorline                  " Highlight the current line
 set ruler                       " Show col/row numbers in status bar
 set spell                       " Spellcheck on
 set spelllang=en                " Spellcheck language
+set spellcapcheck=              " Ignore capitalization errors
 set splitbelow                  " Open new horizontal splits below
 set splitright                  " Open new vertical splits to the right
 hi clear SpellBad
-hi SpellBad cterm=underline
+hi SpellBad cterm=underline,bold
 hi SpellBad ctermfg=darkred
 
 "
@@ -66,42 +93,25 @@ set tabstop=2                   " Indentation of two spaces
 set expandtab                   " Use spaces, not tabs
 set backspace=indent,eol,start  " Backspace through everything in insert mode
 
+
 "
 " Key Mappings
 "
-" Split navigation
+" Easier split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
 " j then k --> <esc>
 inoremap jk <esc>
 
-" Plugins via vim-plug
-" github.com/junegunn/vim-plug
+" k then j --> <esc>
+inoremap kj <esc>
 
-filetype plugin indent off
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'natebosch/vim-lsc'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'chriskempson/base16-vim'
-
-" Initialize plugin system
-call plug#end()
-
-" Color scheme setup
-" if filereadable(expand("~/.vimrc_background"))
-"   let base16colorspace=256
-"   source ~/.vimrc_background
-" endif
-
-colorscheme base16-eighties
-
-" Dart language server
+"
+" Dart language server settings
+"
 let g:lsc_server_commands = {
     \ 'dart': 'dart_language_server',
     \ 'html': 'dart_language_server',
