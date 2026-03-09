@@ -1,4 +1,14 @@
 filetype off
+
+"
+" Load vim-plug -- github.com/junegunn/vim-plug
+"
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 "
 " Plugins via vim-plug -- github.com/junegunn/vim-plug
 "
@@ -9,7 +19,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -30,6 +40,7 @@ colorscheme base16-eighties
 "
 " General settings
 "
+set termguicolors
 set ttyfast
 set lazyredraw
 set nocompatible                " No compatibility with legacy vi
