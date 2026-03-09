@@ -1,11 +1,12 @@
 # Bazel generated files
-# ######################
 bazel*
 
-# OS generated files #
-# ######################
+# OS generated files
 .DS_Store
 
-# Intellij generated files #
-# ######################
+# Intellij generated files
 .idea
+
+# VsCode generated files
+.vscode
+.code-workspace
