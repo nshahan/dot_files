@@ -114,3 +114,6 @@ alias install_dart="$HOME/code/natebosch_dotfiles/bin/install_dart"
 
 # Dart SDK directory used by the install_dart script as the install location.
 export PATH="$PATH:$HOME/dart-sdk/bin"
+
+# Dart pub cache
+export PATH="$PATH":"$HOME/.pub-cache/bin"
